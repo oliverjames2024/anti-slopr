@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- `install-anti-slopr` skill: adoption guidance for large workspaces (`references/adoption.md`). Per-crate opt-in; a committed per-lint baseline with a check that refuses growth; report-only checks that refuse from a stated date; Clippy and Dylint runs scoped to changed packages with `--no-deps`; tool lookup outside a login shell with a typed skip; and agent rules against gaming measures or running repository-wide fixes.
+
 ## v0.1.0 — 2026-10-15
 
 Initial release.
