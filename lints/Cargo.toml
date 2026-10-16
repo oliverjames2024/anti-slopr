@@ -1,0 +1,97 @@
+[package]
+name = "anti_slopr"
+version = "0.1.0"
+authors = ["anti-slopr contributors"]
+description = "Opinionated Dylint lints that reject low-evidence, low-signal Rust patterns"
+edition = "2024"
+license = "MIT"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+clippy_utils = { git = "https://github.com/rust-lang/rust-clippy", rev = "21baba9c10c5d179915cae82e6247bc2337872fb" }
+dylint_linting = "6.1"
+serde = { version = "1", features = ["derive"] }
+
+[dev-dependencies]
+dylint_testing = "6.1"
+# Real crates so the UI examples exercise the actual type paths the lints match.
+anyhow = "1"
+serde_json = "1"
+tokio = { version = "1", features = ["rt", "macros", "time", "fs"] }
+
+[[example]]
+name = "blanket_lint_suppression"
+path = "ui/blanket_lint_suppression.rs"
+
+[[example]]
+name = "blocking_call_in_async"
+path = "ui/blocking_call_in_async.rs"
+
+[[example]]
+name = "deny_warnings_in_source"
+path = "ui/deny_warnings_in_source.rs"
+
+[[example]]
+name = "deref_polymorphism"
+path = "ui/deref_polymorphism.rs"
+
+[[example]]
+name = "discarded_join_handle"
+path = "ui/discarded_join_handle.rs"
+
+[[example]]
+name = "error_to_string"
+path = "ui/error_to_string.rs"
+
+[[example]]
+name = "low_signal_lint_reason"
+path = "ui/low_signal_lint_reason.rs"
+
+[[example]]
+name = "low_signal_panic_message"
+path = "ui/low_signal_panic_message.rs"
+
+[[example]]
+name = "low_signal_safety_comment"
+path = "ui/low_signal_safety_comment.rs"
+
+[[example]]
+name = "missing_item_spacing"
+path = "ui/missing_item_spacing.rs"
+
+[[example]]
+name = "opaque_public_error"
+path = "ui/opaque_public_error.rs"
+crate-type = ["lib"]
+
+[[example]]
+name = "silent_error_default"
+path = "ui/silent_error_default.rs"
+
+[[example]]
+name = "slop_comment"
+path = "ui/slop_comment.rs"
+
+[[example]]
+name = "stringly_typed_error"
+path = "ui/stringly_typed_error.rs"
+
+[[example]]
+name = "test_without_assertion"
+path = "ui/test_without_assertion.rs"
+
+[[example]]
+name = "untyped_value_in_signature"
+path = "ui/untyped_value_in_signature.rs"
+
+[[example]]
+name = "vague_symbol_name"
+path = "ui/vague_symbol_name.rs"
+
+[package.metadata.rust-analyzer]
+rustc_private = true
+
+[workspace]

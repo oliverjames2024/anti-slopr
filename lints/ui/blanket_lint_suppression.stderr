@@ -1,0 +1,75 @@
+warning: `#![allow(dead_code)]` suppresses `dead_code` for the whole crate
+  --> $DIR/blanket_lint_suppression.rs:2:10
+   |
+LL | #![allow(dead_code)]
+   |          ^^^^^^^^^
+   |
+   = help: fix the code, or put a narrow `#[expect(lint, reason = "..")]` on the specific item; a deliberate crate-wide policy belongs in the `[lints]` table of Cargo.toml, next to the rest of the policy
+   = note: `#[warn(blanket_lint_suppression)]` on by default
+
+warning: `#![expect(clippy::needless_return)]` suppresses `clippy::needless_return` for the whole crate
+  --> $DIR/blanket_lint_suppression.rs:6:27
+   |
+LL | #![cfg_attr(all(), expect(clippy::needless_return, reason = "the crate prefers explicit returns"))]
+   |                           ^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: fix the code, or put a narrow `#[expect(lint, reason = "..")]` on the specific item; a deliberate crate-wide policy belongs in the `[lints]` table of Cargo.toml, next to the rest of the policy
+
+warning: `#![allow(unused)]` suppresses every lint in the `unused` group
+  --> $DIR/blanket_lint_suppression.rs:4:10
+   |
+LL | #![allow(unused)]
+   |          ^^^^^^
+   |
+   = help: fix the code, or put a narrow `#[expect(lint, reason = "..")]` on the specific item
+
+warning: `#![allow(clippy::module_name_repetitions)]` suppresses `clippy::module_name_repetitions` for the whole module `inline_module`
+  --> $DIR/blanket_lint_suppression.rs:13:14
+   |
+LL |     #![allow(clippy::module_name_repetitions, non_snake_case)]
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: fix the code, or put a narrow `#[expect(lint, reason = "..")]` on the specific item
+
+warning: `#![allow(non_snake_case)]` suppresses `non_snake_case` for the whole module `inline_module`
+  --> $DIR/blanket_lint_suppression.rs:13:47
+   |
+LL |     #![allow(clippy::module_name_repetitions, non_snake_case)]
+   |                                               ^^^^^^^^^^^^^^
+   |
+   = help: fix the code, or put a narrow `#[expect(lint, reason = "..")]` on the specific item
+
+warning: `#[allow(clippy::all)]` suppresses every lint in the `clippy::all` group
+  --> $DIR/blanket_lint_suppression.rs:20:9
+   |
+LL | #[allow(clippy::all)]
+   |         ^^^^^^^^^^^
+   |
+   = help: fix the code, or put a narrow `#[expect(lint, reason = "..")]` on the specific item
+
+warning: `#[expect(clippy::pedantic)]` suppresses every lint in the `clippy::pedantic` group
+  --> $DIR/blanket_lint_suppression.rs:23:10
+   |
+LL | #[expect(clippy::pedantic, reason = "the pedantic group is noisy here")]
+   |          ^^^^^^^^^^^^^^^^
+   |
+   = help: fix the code, or put a narrow `#[expect(lint, reason = "..")]` on the specific item
+
+warning: `#[allow(clippy::complexity)]` suppresses every lint in the `clippy::complexity` group
+  --> $DIR/blanket_lint_suppression.rs:26:9
+   |
+LL | #[allow(clippy::complexity, clippy::cast_possible_truncation)]
+   |         ^^^^^^^^^^^^^^^^^^
+   |
+   = help: fix the code, or put a narrow `#[expect(lint, reason = "..")]` on the specific item
+
+warning: `#![allow(nonstandard_style)]` suppresses every lint in the `nonstandard_style` group
+  --> $DIR/blanket_lint_suppression.rs:32:14
+   |
+LL |     #![allow(nonstandard_style)]
+   |              ^^^^^^^^^^^^^^^^^
+   |
+   = help: fix the code, or put a narrow `#[expect(lint, reason = "..")]` on the specific item
+
+warning: 9 warnings emitted
+

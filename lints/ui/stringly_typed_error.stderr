@@ -1,0 +1,51 @@
+warning: error type `std::string::String` is a string
+  --> $DIR/stringly_typed_error.rs:4:26
+   |
+LL | fn owned(input: &str) -> Result<u16, String> {
+   |                          ^^^^^^^^^^^^^^^^^^^
+   |
+   = help: define an error type (an enum or struct implementing `std::error::Error`) that keeps the cause
+   = note: `#[warn(stringly_typed_error)]` on by default
+
+warning: error type `&'static str` is a string
+  --> $DIR/stringly_typed_error.rs:8:29
+   |
+LL | fn borrowed(input: &str) -> Result<u16, &'static str> {
+   |                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: define an error type (an enum or struct implementing `std::error::Error`) that keeps the cause
+
+warning: error type `std::boxed::Box<str>` is a string
+  --> $DIR/stringly_typed_error.rs:12:26
+   |
+LL | fn boxed(input: &str) -> Result<u16, Box<str>> {
+   |                          ^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: define an error type (an enum or struct implementing `std::error::Error`) that keeps the cause
+
+warning: error type `std::borrow::Cow<'static, str>` is a string
+  --> $DIR/stringly_typed_error.rs:16:24
+   |
+LL | fn cow(input: &str) -> Result<u16, Cow<'static, str>> {
+   |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: define an error type (an enum or struct implementing `std::error::Error`) that keeps the cause
+
+warning: error type `std::string::String` is a string
+  --> $DIR/stringly_typed_error.rs:22:17
+   |
+LL | fn aliased() -> StringResult<()> {
+   |                 ^^^^^^^^^^^^^^^^
+   |
+   = help: define an error type (an enum or struct implementing `std::error::Error`) that keeps the cause
+
+warning: error type `std::string::String` is a string
+  --> $DIR/stringly_typed_error.rs:27:23
+   |
+LL |     fn load(&self) -> Result<Vec<u8>, String>;
+   |                       ^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: define an error type (an enum or struct implementing `std::error::Error`) that keeps the cause
+
+warning: 6 warnings emitted
+

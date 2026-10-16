@@ -1,0 +1,195 @@
+# anti-slopr stable profile: rustc + Clippy lint levels.
+#
+# Merge these tables into your workspace Cargo.toml, then opt each member in with
+#     [lints]
+#     workspace = true
+# For a single-crate package, rename `workspace.lints` to `lints`.
+#
+# CI: cargo clippy --workspace --all-targets --all-features -- -D warnings
+#
+# "deny" marks anti-slopr's core policy: never acceptable without a narrow
+# `#[expect(lint, reason = "...")]`. "warn" is a strong default that CI turns
+# into an error. Groups sit at priority -1 so single-lint entries override them.
+
+[workspace.lints.rust]
+rust_2018_idioms = { level = "warn", priority = -1 }
+future_incompatible = { level = "warn", priority = -1 }
+nonstandard_style = { level = "warn", priority = -1 }
+unsafe_code = "deny"                    # crates that need it opt in with #![expect(unsafe_code, reason = "...")]
+unsafe_op_in_unsafe_fn = "deny"         # an unsafe fn body is not one big unsafe block
+unfulfilled_lint_expectations = "deny"  # a stale #[expect] fails the build, so suppressions cannot rot
+unused_must_use = "deny"                # a dropped Result is a silently ignored error
+non_ascii_idents = "deny"
+unreachable_pub = "warn"                # `pub` that cannot be reached overstates the API
+unused_qualifications = "warn"
+redundant_imports = "warn"
+unused_import_braces = "warn"
+unused_lifetimes = "warn"
+redundant_lifetimes = "warn"
+unused_macro_rules = "warn"
+elided_lifetimes_in_paths = "warn"      # `Foo<'_>` shows where borrowing happens
+explicit_outlives_requirements = "warn"
+let_underscore_drop = "warn"            # `let _ = guard;` drops immediately
+unit_bindings = "warn"
+trivial_casts = "warn"
+trivial_numeric_casts = "warn"
+meta_variable_misuse = "warn"
+ambiguous_negative_literals = "warn"
+unnameable_types = "warn"
+closure_returning_async_block = "warn"  # use an async closure
+missing_debug_implementations = "warn"  # every public type should be inspectable
+# Deliberately off:
+#   missing_docs — forces "/// Returns the foo." boilerplate, which is itself slop.
+#   unused_results — far too noisy; unused_must_use covers the important cases.
+#   unused_crate_dependencies — false positives across targets; use cargo-shear.
+
+# `cfg(dylint_lib = "anti_slopr")` lets code expect anti-slopr lints without
+# warnings when the crate is built by plain cargo.
+[workspace.lints.rust.unexpected_cfgs]
+level = "warn"
+check-cfg = ["cfg(dylint_lib, values(any()))"]
+
+[workspace.lints.rustdoc]
+broken_intra_doc_links = "deny"
+private_intra_doc_links = "warn"
+bare_urls = "warn"
+unescaped_backticks = "warn"
+redundant_explicit_links = "warn"
+
+[workspace.lints.clippy]
+correctness = { level = "deny", priority = -1 }
+suspicious = { level = "deny", priority = -1 }
+complexity = { level = "warn", priority = -1 }
+perf = { level = "warn", priority = -1 }
+style = { level = "warn", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+cargo = { level = "warn", priority = -1 }
+# nursery is not enabled as a group: unstable and false-positive prone. Picks below.
+# restriction must never be enabled as a group; picks below.
+
+# Pedantic opt-outs. Each is disabled by at least two of ruff, uv, oxc, rerun.
+must_use_candidate = "allow"            # sprays #[must_use] everywhere
+missing_errors_doc = "allow"            # produces "# Errors: returns an error if it fails" boilerplate
+similar_names = "allow"
+map_unwrap_or = "allow"
+implicit_hasher = "allow"
+return_self_not_must_use = "allow"
+if_not_else = "allow"
+unnecessary_debug_formatting = "allow"
+match_same_arms = "allow"
+multiple_crate_versions = "allow"       # use cargo-deny instead
+cargo_common_metadata = "allow"         # only matters for crates.io packages
+# Pedantic lints other projects disable that anti-slopr keeps on deliberately:
+#   used_underscore_binding, struct_excessive_bools, fn_params_excessive_bools,
+#   too_many_lines (threshold tightened in clippy.toml), missing_panics_doc, cast_*.
+
+# Evidence and honest suppression.
+allow_attributes = "deny"               # #[allow] -> #[expect], which fails once the lint stops firing
+allow_attributes_without_reason = "deny"
+
+# No hidden panics. `expect` stays legal: anti-slopr's low_signal_panic_message
+# requires its message to state the invariant instead.
+unwrap_used = "deny"
+get_unwrap = "deny"
+todo = "deny"
+unimplemented = "deny"
+dbg_macro = "deny"
+panic_in_result_fn = "warn"             # a fn returning Result that also panics breaks its contract
+string_slice = "warn"                   # &s[a..b] panics on a char boundary
+missing_asserts_for_indexing = "warn"
+
+# Swallowed errors and discarded evidence.
+map_err_ignore = "deny"                 # .map_err(|_| ..) throws the cause away
+unused_result_ok = "deny"               # `x.ok();` to silence an error
+let_underscore_must_use = "deny"
+let_underscore_untyped = "warn"         # `let _: Result<..> =` states what is discarded
+assertions_on_result_states = "warn"    # assert!(r.is_ok()) hides the error
+
+# unsafe.
+undocumented_unsafe_blocks = "deny"
+multiple_unsafe_ops_per_block = "deny"  # one SAFETY argument per operation
+unnecessary_safety_comment = "warn"
+unnecessary_safety_doc = "warn"
+
+# Casts.
+as_conversions = "warn"                 # `as` silently truncates or wraps; use From/TryFrom
+as_underscore = "deny"
+as_pointer_underscore = "deny"
+fn_to_numeric_cast_any = "deny"
+lossy_float_literal = "warn"
+float_cmp_const = "warn"
+
+# Low-signal code.
+wildcard_enum_match_arm = "warn"        # `_ =>` hides newly added variants
+rest_pat_in_fully_bound_structs = "warn"
+redundant_type_annotations = "warn"
+redundant_test_prefix = "warn"          # #[test] fn test_foo
+tests_outside_test_module = "warn"
+cfg_not_test = "warn"                   # production differs from what was tested
+shadow_unrelated = "warn"
+renamed_function_params = "warn"
+same_name_method = "warn"
+partial_pub_fields = "warn"             # half-public struct has no real invariant
+error_impl_error = "warn"
+try_err = "warn"
+if_then_some_else_none = "warn"
+clone_on_ref_ptr = "warn"               # Arc::clone(&x) makes the cheap clone visible
+str_to_string = "warn"
+string_add = "warn"
+deref_by_slicing = "warn"
+unnecessary_self_imports = "warn"
+empty_drop = "warn"
+empty_structs_with_brackets = "warn"
+empty_enum_variants_with_brackets = "warn"
+mem_forget = "warn"
+iter_over_hash_type = "warn"            # iteration order is nondeterministic
+infinite_loop = "warn"
+exit = "warn"                           # skips destructors; return ExitCode from main
+print_stdout = "warn"                   # use tracing; a CLI's output module opts in with #[expect]
+print_stderr = "warn"
+rc_buffer = "warn"
+rc_mutex = "warn"
+mutex_atomic = "warn"
+mutex_integer = "warn"
+verbose_file_reads = "warn"
+filetype_is_file = "warn"
+pathbuf_init_then_push = "warn"
+return_and_then = "warn"
+non_zero_suggestions = "warn"
+precedence_bits = "warn"
+suspicious_xor_used_as_pow = "warn"
+# Deliberately off (restriction): indexing_slicing, arithmetic_side_effects,
+# missing_docs_in_private_items, question_mark_used, implicit_return,
+# cognitive_complexity (use excessive_nesting), expect_used (see above), panic.
+
+# Nursery picks.
+redundant_clone = "warn"                # .clone() to quiet the borrow checker
+needless_collect = "warn"
+collection_is_never_read = "warn"
+branches_sharing_code = "warn"
+or_fun_call = "warn"
+use_self = "warn"
+needless_pass_by_ref_mut = "warn"
+debug_assert_with_mut_call = "warn"
+unused_peekable = "warn"
+significant_drop_in_scrutinee = "warn"  # lock held across a match
+trait_duplication_in_bounds = "warn"
+type_repetition_in_bounds = "warn"
+iter_on_single_items = "warn"
+iter_on_empty_collections = "warn"
+unnecessary_struct_initialization = "warn"
+useless_let_if_seq = "warn"
+string_lit_as_bytes = "warn"
+fallible_impl_from = "warn"             # a From impl that panics should be TryFrom
+literal_string_with_formatting_args = "warn"
+needless_type_cast = "warn"
+set_contains_or_insert = "warn"
+read_zero_byte_vec = "warn"
+path_buf_push_overwrite = "warn"
+coerce_container_to_any = "warn"
+equatable_if_let = "warn"
+
+# The disallowed-* lists in clippy.toml are policy, so make them errors.
+disallowed_methods = "deny"
+disallowed_types = "deny"
+disallowed_macros = "deny"

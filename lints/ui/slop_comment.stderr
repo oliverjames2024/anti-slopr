@@ -1,0 +1,251 @@
+warning: placeholder comment `... other fields` stands in for code that is not there
+  --> $DIR/slop_comment.rs:11:5
+   |
+LL |     // ... other fields
+   |     ^^^^^^^^^^^^^^^^^^^
+   |
+   = help: write the code the placeholder stands for, or delete the comment
+   = note: `#[warn(slop_comment)]` on by default
+
+warning: placeholder comment `...` stands in for code that is not there
+  --> $DIR/slop_comment.rs:16:5
+   |
+LL |     // ...
+   |     ^^^^^^
+   |
+   = help: write the code the placeholder stands for, or delete the comment
+
+warning: placeholder comment `... rest of the request validation` stands in for code that is not there
+  --> $DIR/slop_comment.rs:23:5
+   |
+LL |     // ... rest of the request validation
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: write the code the placeholder stands for, or delete the comment
+
+warning: placeholder comment `Rest of the implementation remains unchanged` stands in for code that is not there
+  --> $DIR/slop_comment.rs:28:5
+   |
+LL |     // Rest of the implementation remains unchanged
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: write the code the placeholder stands for, or delete the comment
+
+warning: placeholder comment `... existing code ...` stands in for code that is not there
+  --> $DIR/slop_comment.rs:32:5
+   |
+LL |     // ... existing code ...
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: write the code the placeholder stands for, or delete the comment
+
+warning: placeholder comment `Your code goes here` stands in for code that is not there
+  --> $DIR/slop_comment.rs:36:5
+   |
+LL |     // Your code goes here
+   |     ^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: write the code the placeholder stands for, or delete the comment
+
+warning: placeholder comment `Add more variants as needed` stands in for code that is not there
+  --> $DIR/slop_comment.rs:41:5
+   |
+LL |     // Add more variants as needed
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: write the code the placeholder stands for, or delete the comment
+
+warning: placeholder comment `etc.` stands in for code that is not there
+  --> $DIR/slop_comment.rs:45:5
+   |
+LL |     // etc.
+   |     ^^^^^^^
+   |
+   = help: write the code the placeholder stands for, or delete the comment
+
+warning: placeholder comment `...` stands in for code that is not there
+  --> $DIR/slop_comment.rs:48:4
+   |
+LL | /* ... */
+   |    ^^^
+   |
+   = help: write the code the placeholder stands for, or delete the comment
+
+warning: comment narrates an edit (`added error`) instead of describing the code
+  --> $DIR/slop_comment.rs:56:5
+   |
+LL |     // Added error handling for empty input.
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: describe what the code does and why; the history of a change belongs in the commit message
+
+warning: comment narrates an edit (`fixed:`) instead of describing the code
+  --> $DIR/slop_comment.rs:60:5
+   |
+LL |     // Fixed: off-by-one in the loop bound
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: describe what the code does and why; the history of a change belongs in the commit message
+
+warning: comment narrates an edit (`changed to`) instead of describing the code
+  --> $DIR/slop_comment.rs:62:5
+   |
+LL |     // Changed to use a fold instead of a loop
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: describe what the code does and why; the history of a change belongs in the commit message
+
+warning: comment narrates an edit (`now uses`) instead of describing the code
+  --> $DIR/slop_comment.rs:66:5
+   |
+LL |     // Now uses saturating arithmetic.
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: describe what the code does and why; the history of a change belongs in the commit message
+
+warning: comment narrates an edit (`previously`) instead of describing the code
+  --> $DIR/slop_comment.rs:71:5
+   |
+LL |     // Previously, this returned a Vec.
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: describe what the code does and why; the history of a change belongs in the commit message
+
+warning: comment narrates an edit (`we used to`) instead of describing the code
+  --> $DIR/slop_comment.rs:76:5
+   |
+LL |     // We used to panic here.
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: describe what the code does and why; the history of a change belongs in the commit message
+
+warning: comment narrates an edit (`refactored the`) instead of describing the code
+  --> $DIR/slop_comment.rs:80:5
+   |
+LL |     // Sum the values. Refactored the loop into an iterator chain.
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: describe what the code does and why; the history of a change belongs in the commit message
+
+warning: comment hedges that this is not the real implementation (`in a real application`)
+  --> $DIR/slop_comment.rs:88:5
+   |
+LL |     // In a real application, this would read from a database.
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: implement the real behaviour, or state the concrete limitation and link an issue that tracks it
+
+warning: comment hedges that this is not the real implementation (`for simplicity`)
+  --> $DIR/slop_comment.rs:93:5
+   |
+LL |     // For simplicity, we assume ASCII input
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: implement the real behaviour, or state the concrete limitation and link an issue that tracks it
+
+warning: comment hedges that this is not the real implementation (`in production you would`)
+  --> $DIR/slop_comment.rs:102:5
+   |
+LL |     // In production, you would use a connection pool.
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: implement the real behaviour, or state the concrete limitation and link an issue that tracks it
+
+warning: comment hedges that this is not the real implementation (`replace this with a real`)
+  --> $DIR/slop_comment.rs:106:5
+   |
+LL |     // TODO: replace this with a real clock.
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: implement the real behaviour, or state the concrete limitation and link an issue that tracks it
+
+warning: comment hedges that this is not the real implementation (`you might want to`)
+  --> $DIR/slop_comment.rs:111:5
+   |
+LL |     // You might want to add caching
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: implement the real behaviour, or state the concrete limitation and link an issue that tracks it
+
+warning: comment hedges that this is not the real implementation (`for demonstration purposes`)
+  --> $DIR/slop_comment.rs:116:8
+   |
+LL |     /* For demonstration purposes only. */
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: implement the real behaviour, or state the concrete limitation and link an issue that tracks it
+
+warning: comment `TODO: implement` admits that behaviour is missing
+  --> $DIR/slop_comment.rs:124:5
+   |
+LL |     // TODO: implement
+   |     ^^^^^^^^^^^^^^^^^^
+   |
+   = help: implement it, or fail loudly with `todo!()`/`unimplemented!()` or an error, and reference a tracking issue
+
+warning: comment `TODO: add error handling` admits that behaviour is missing
+  --> $DIR/slop_comment.rs:129:5
+   |
+LL |     // TODO: add error handling
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: implement it, or fail loudly with `todo!()`/`unimplemented!()` or an error, and reference a tracking issue
+
+warning: comment `FIXME: handle errors properly` admits that behaviour is missing
+  --> $DIR/slop_comment.rs:134:5
+   |
+LL |     // FIXME: handle errors properly
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: implement it, or fail loudly with `todo!()`/`unimplemented!()` or an error, and reference a tracking issue
+
+warning: comment `Not yet implemented.` admits that behaviour is missing
+  --> $DIR/slop_comment.rs:138:5
+   |
+LL |     // Not yet implemented.
+   |     ^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: implement it, or fail loudly with `todo!()`/`unimplemented!()` or an error, and reference a tracking issue
+
+warning: comment `implement me` admits that behaviour is missing
+  --> $DIR/slop_comment.rs:142:5
+   |
+LL |     // implement me
+   |     ^^^^^^^^^^^^^^^
+   |
+   = help: implement it, or fail loudly with `todo!()`/`unimplemented!()` or an error, and reference a tracking issue
+
+warning: placeholder comment `...` stands in for code that is not there
+  --> $DIR/slop_comment.rs:151:5
+   |
+LL |     // ...
+   |     ^^^^^^
+   |
+   = help: write the code the placeholder stands for, or delete the comment
+
+warning: comment hedges that this is not the real implementation (`for simplicity`)
+  --> $DIR/slop_comment.rs:150:5
+   |
+LL |     // Updated the parser. For simplicity, the rest is omitted.
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: implement the real behaviour, or state the concrete limitation and link an issue that tracks it
+
+warning: comment narrates an edit (`updated the`) instead of describing the code
+  --> $DIR/slop_comment.rs:150:5
+   |
+LL |     // Updated the parser. For simplicity, the rest is omitted.
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: describe what the code does and why; the history of a change belongs in the commit message
+
+warning: comment hedges that this is not the real implementation (`this is a placeholder`)
+  --> $DIR/slop_comment.rs:98:1
+   |
+LL | /// This is a placeholder implementation.
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: implement the real behaviour, or state the concrete limitation and link an issue that tracks it
+
+warning: 31 warnings emitted
+

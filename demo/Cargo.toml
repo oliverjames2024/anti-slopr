@@ -1,0 +1,22 @@
+# A deliberately sloppy crate: the kind of code anti-slopr exists to reject.
+# scripts/e2e.sh runs the local anti-slopr library against it and checks that
+# every lint fires at least once.
+[package]
+name = "inventory_sync"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+anyhow = "1"
+serde_json = "1"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "time"] }
+
+[lints.rust.unexpected_cfgs]
+level = "warn"
+check-cfg = ["cfg(dylint_lib, values(any()))"]
+
+[workspace]
+
+[workspace.metadata.dylint]
+libraries = [{ path = "../lints" }]

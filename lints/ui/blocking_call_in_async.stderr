@@ -1,0 +1,51 @@
+warning: blocking call to `std::thread::sleep` inside an async body
+  --> $DIR/blocking_call_in_async.rs:4:5
+   |
+LL |     std::thread::sleep(Duration::from_millis(1));
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: use the runtime's timer, e.g. `tokio::time::sleep(..).await`
+   = note: `#[warn(blocking_call_in_async)]` on by default
+
+warning: blocking call to `std::fs::read_to_string` inside an async body
+  --> $DIR/blocking_call_in_async.rs:8:5
+   |
+LL |     std::fs::read_to_string("Cargo.toml")
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: use `tokio::fs` (or another async fs API), or move the work into `spawn_blocking`
+
+warning: blocking call to `std::fs::File::open` inside an async body
+  --> $DIR/blocking_call_in_async.rs:12:5
+   |
+LL |     std::fs::File::open("Cargo.toml")
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: use `tokio::fs` (or another async fs API), or move the work into `spawn_blocking`
+
+warning: blocking call to `std::process::Command::output` inside an async body
+  --> $DIR/blocking_call_in_async.rs:16:5
+   |
+LL |     std::process::Command::new("true").output()
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: use `tokio::process::Command`, or `spawn_blocking`
+
+warning: blocking call to `std::thread::sleep` inside an async body
+  --> $DIR/blocking_call_in_async.rs:21:9
+   |
+LL |         std::thread::sleep(Duration::from_millis(1));
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: use the runtime's timer, e.g. `tokio::time::sleep(..).await`
+
+warning: blocking call to `std::sync::mpsc::Receiver::recv` inside an async body
+  --> $DIR/blocking_call_in_async.rs:26:5
+   |
+LL |     rx.recv().ok()
+   |     ^^^^^^^^^
+   |
+   = help: use an async channel, e.g. `tokio::sync::mpsc`
+
+warning: 6 warnings emitted
+

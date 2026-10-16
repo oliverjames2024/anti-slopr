@@ -1,0 +1,171 @@
+warning: parameter `payload` has untyped type `serde_json::Value`
+  --> $DIR/untyped_value_in_signature.rs:8:25
+   |
+LL | fn create_user(payload: Value) -> u64 {
+   |                         ^^^^^
+   |
+   = help: parse it at the boundary into a struct or enum that states the expected shape
+   = note: `#[warn(untyped_value_in_signature)]` on by default
+
+warning: return type has untyped type `serde_json::Map`
+  --> $DIR/untyped_value_in_signature.rs:12:23
+   |
+LL | fn load_settings() -> serde_json::Map<String, Value> {
+   |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: parse it at the boundary into a struct or enum that states the expected shape
+
+warning: parameter `items` contains untyped `serde_json::Value`
+  --> $DIR/untyped_value_in_signature.rs:16:18
+   |
+LL | fn nested(items: Option<Vec<HashMap<String, Value>>>) -> Result<Box<Value>, std::io::Error> {
+   |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: parse it at the boundary into a struct or enum that states the expected shape
+
+warning: return type contains untyped `serde_json::Value`
+  --> $DIR/untyped_value_in_signature.rs:16:58
+   |
+LL | fn nested(items: Option<Vec<HashMap<String, Value>>>) -> Result<Box<Value>, std::io::Error> {
+   |                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: parse it at the boundary into a struct or enum that states the expected shape
+
+warning: parameter 1 has untyped type `&serde_json::Value`
+  --> $DIR/untyped_value_in_signature.rs:21:16
+   |
+LL | fn borrowed(_: &Value, raw: &mut Map<String, Value>) {
+   |                ^^^^^^
+   |
+   = help: parse it at the boundary into a struct or enum that states the expected shape
+
+warning: parameter `raw` has untyped type `&mut serde_json::Map`
+  --> $DIR/untyped_value_in_signature.rs:21:29
+   |
+LL | fn borrowed(_: &Value, raw: &mut Map<String, Value>) {
+   |                             ^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: parse it at the boundary into a struct or enum that states the expected shape
+
+warning: parameter `state` contains untyped `dyn std::any::Any`
+  --> $DIR/untyped_value_in_signature.rs:25:18
+   |
+LL | fn erased(state: Box<dyn Any + Send>) -> Option<&'static dyn Any> {
+   |                  ^^^^^^^^^^^^^^^^^^^
+   |
+   = help: parse it at the boundary into a struct or enum that states the expected shape
+
+warning: return type contains untyped `dyn std::any::Any`
+  --> $DIR/untyped_value_in_signature.rs:25:42
+   |
+LL | fn erased(state: Box<dyn Any + Send>) -> Option<&'static dyn Any> {
+   |                                          ^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: parse it at the boundary into a struct or enum that states the expected shape
+
+warning: return type contains untyped `serde_json::Value`
+  --> $DIR/untyped_value_in_signature.rs:30:18
+   |
+LL | fn iterator() -> impl Iterator<Item = Value> {
+   |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: parse it at the boundary into a struct or enum that states the expected shape
+
+warning: return type has untyped type `serde_json::Value`
+  --> $DIR/untyped_value_in_signature.rs:34:21
+   |
+LL | async fn fetch() -> Value {
+   |                     ^^^^^
+   |
+   = help: parse it at the boundary into a struct or enum that states the expected shape
+
+warning: parameter `value` has untyped type `serde_json::Value`
+  --> $DIR/untyped_value_in_signature.rs:40:19
+   |
+LL | fn aliased(value: Json) -> bool {
+   |                   ^^^^
+   |
+   = help: parse it at the boundary into a struct or enum that states the expected shape
+
+warning: field `payload` has untyped type `serde_json::Value`
+  --> $DIR/untyped_value_in_signature.rs:46:14
+   |
+LL |     payload: Value,
+   |              ^^^^^
+   |
+   = help: parse it at the boundary into a struct or enum that states the expected shape
+
+warning: field `tags` contains untyped `serde_json::Value`
+  --> $DIR/untyped_value_in_signature.rs:47:11
+   |
+LL |     tags: Vec<Value>,
+   |           ^^^^^^^^^^
+   |
+   = help: parse it at the boundary into a struct or enum that states the expected shape
+
+warning: field `1` contains untyped `serde_json::Value`
+  --> $DIR/untyped_value_in_signature.rs:50:18
+   |
+LL | struct Pair(u32, Option<Value>);
+   |                  ^^^^^^^^^^^^^
+   |
+   = help: parse it at the boundary into a struct or enum that states the expected shape
+
+warning: field `body` of variant `Data` has untyped type `serde_json::Value`
+  --> $DIR/untyped_value_in_signature.rs:54:18
+   |
+LL |     Data { body: Value },
+   |                  ^^^^^
+   |
+   = help: parse it at the boundary into a struct or enum that states the expected shape
+
+warning: field `0` of variant `Raw` contains untyped `dyn std::any::Any`
+  --> $DIR/untyped_value_in_signature.rs:55:9
+   |
+LL |     Raw(Box<dyn Any>),
+   |         ^^^^^^^^^^^^
+   |
+   = help: parse it at the boundary into a struct or enum that states the expected shape
+
+warning: parameter `request` has untyped type `serde_json::Value`
+  --> $DIR/untyped_value_in_signature.rs:59:31
+   |
+LL |     fn handle(&self, request: Value) -> Value;
+   |                               ^^^^^
+   |
+   = help: parse it at the boundary into a struct or enum that states the expected shape
+
+warning: return type has untyped type `serde_json::Value`
+  --> $DIR/untyped_value_in_signature.rs:59:41
+   |
+LL |     fn handle(&self, request: Value) -> Value;
+   |                                         ^^^^^
+   |
+   = help: parse it at the boundary into a struct or enum that states the expected shape
+
+warning: parameter `request` has untyped type `&serde_json::Value`
+  --> $DIR/untyped_value_in_signature.rs:61:33
+   |
+LL |     fn provided(&self, request: &Value) -> bool {
+   |                                 ^^^^^^
+   |
+   = help: parse it at the boundary into a struct or enum that states the expected shape
+
+warning: parameter `request` has untyped type `serde_json::Value`
+  --> $DIR/untyped_value_in_signature.rs:69:30
+   |
+LL |     fn reply(&self, request: Value) -> Value {
+   |                              ^^^^^
+   |
+   = help: parse it at the boundary into a struct or enum that states the expected shape
+
+warning: return type has untyped type `serde_json::Value`
+  --> $DIR/untyped_value_in_signature.rs:69:40
+   |
+LL |     fn reply(&self, request: Value) -> Value {
+   |                                        ^^^^^
+   |
+   = help: parse it at the boundary into a struct or enum that states the expected shape
+
+warning: 21 warnings emitted
+

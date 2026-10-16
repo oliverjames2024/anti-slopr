@@ -1,0 +1,59 @@
+warning: test `calls_without_checking` asserts nothing
+  --> $DIR/test_without_assertion.rs:21:4
+   |
+LL | fn calls_without_checking() {
+   |    ^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: assert on the behaviour the test names (`assert_eq!`, `assert!(matches!(..))`, `.unwrap()` on the result under test), or mark an expected panic with `#[should_panic]`
+   = note: `#[warn(test_without_assertion)]` on by default
+
+warning: test `empty` asserts nothing
+  --> $DIR/test_without_assertion.rs:26:4
+   |
+LL | fn empty() {}
+   |    ^^^^^
+   |
+   = help: assert on the behaviour the test names (`assert_eq!`, `assert!(matches!(..))`, `.unwrap()` on the result under test), or mark an expected panic with `#[should_panic]`
+
+warning: test `prints_only` asserts nothing
+  --> $DIR/test_without_assertion.rs:29:4
+   |
+LL | fn prints_only() {
+   |    ^^^^^^^^^^^
+   |
+   = help: assert on the behaviour the test names (`assert_eq!`, `assert!(matches!(..))`, `.unwrap()` on the result under test), or mark an expected panic with `#[should_panic]`
+
+warning: test `returns_ok_without_question_mark` asserts nothing
+  --> $DIR/test_without_assertion.rs:34:4
+   |
+LL | fn returns_ok_without_question_mark() -> Result<(), std::num::ParseIntError> {
+   |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: assert on the behaviour the test names (`assert_eq!`, `assert!(matches!(..))`, `.unwrap()` on the result under test), or mark an expected panic with `#[should_panic]`
+
+warning: test `ignores_result` asserts nothing
+  --> $DIR/test_without_assertion.rs:40:4
+   |
+LL | fn ignores_result() {
+   |    ^^^^^^^^^^^^^^
+   |
+   = help: assert on the behaviour the test names (`assert_eq!`, `assert!(matches!(..))`, `.unwrap()` on the result under test), or mark an expected panic with `#[should_panic]`
+
+warning: test `async_without_checking` asserts nothing
+  --> $DIR/test_without_assertion.rs:46:10
+   |
+LL | async fn async_without_checking() {
+   |          ^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: assert on the behaviour the test names (`assert_eq!`, `assert!(matches!(..))`, `.unwrap()` on the result under test), or mark an expected panic with `#[should_panic]`
+
+warning: test `ignored_still_counts` asserts nothing
+  --> $DIR/test_without_assertion.rs:52:4
+   |
+LL | fn ignored_still_counts() {
+   |    ^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: assert on the behaviour the test names (`assert_eq!`, `assert!(matches!(..))`, `.unwrap()` on the result under test), or mark an expected panic with `#[should_panic]`
+
+warning: 7 warnings emitted
+

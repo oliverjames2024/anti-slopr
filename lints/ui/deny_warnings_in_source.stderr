@@ -1,0 +1,38 @@
+error: `deny(warnings)` in source fails the build on any new compiler or clippy warning
+  --> $DIR/deny_warnings_in_source.rs:3:9
+   |
+LL | #![deny(warnings)]
+   |         ^^^^^^^^
+   |
+   = help: enforce it in CI instead (`RUSTFLAGS="-D warnings"` or `cargo clippy -- -D warnings`), or set specific lint levels in the `[lints]` table of Cargo.toml
+note: the lint level is defined here
+  --> $DIR/deny_warnings_in_source.rs:4:33
+   |
+LL | #![cfg_attr(all(), deny(unused, warnings))]
+   |                                 ^^^^^^^^
+   = note: `#[deny(deny_warnings_in_source)]` implied by `#[deny(warnings)]`
+
+error: `deny(warnings)` in source fails the build on any new compiler or clippy warning
+  --> $DIR/deny_warnings_in_source.rs:4:33
+   |
+LL | #![cfg_attr(all(), deny(unused, warnings))]
+   |                                 ^^^^^^^^
+   |
+   = help: enforce it in CI instead (`RUSTFLAGS="-D warnings"` or `cargo clippy -- -D warnings`), or set specific lint levels in the `[lints]` table of Cargo.toml
+
+error: `forbid(warnings)` in source fails the build on any new compiler or clippy warning
+  --> $DIR/deny_warnings_in_source.rs:12:10
+   |
+LL | #[forbid(warnings)]
+   |          ^^^^^^^^
+   |
+   = help: enforce it in CI instead (`RUSTFLAGS="-D warnings"` or `cargo clippy -- -D warnings`), or set specific lint levels in the `[lints]` table of Cargo.toml
+note: the lint level is defined here
+  --> $DIR/deny_warnings_in_source.rs:12:10
+   |
+LL | #[forbid(warnings)]
+   |          ^^^^^^^^
+   = note: `#[forbid(deny_warnings_in_source)]` implied by `#[forbid(warnings)]`
+
+error: aborting due to 3 previous errors
+

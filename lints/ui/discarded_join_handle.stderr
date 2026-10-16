@@ -1,0 +1,77 @@
+warning: `tokio::task::JoinHandle` is dropped, so the task's panics and result are silently lost
+  --> $DIR/discarded_join_handle.rs:11:5
+   |
+LL |     tokio::spawn(work());
+   |     ^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: keep the handle (or spawn into a `tokio::task::JoinSet`) and await it; if detaching is intended, write `drop(handle)` with a comment saying why
+   = note: `#[warn(discarded_join_handle)]` on by default
+
+warning: `tokio::task::JoinHandle` is dropped, so the task's panics and result are silently lost
+  --> $DIR/discarded_join_handle.rs:13:5
+   |
+LL | /     tokio::task::spawn(async {
+LL | |         work().await;
+LL | |     });
+   | |_______^
+   |
+   = help: keep the handle (or spawn into a `tokio::task::JoinSet`) and await it; if detaching is intended, write `drop(handle)` with a comment saying why
+
+warning: `tokio::task::JoinHandle` is dropped, so the task's panics and result are silently lost
+  --> $DIR/discarded_join_handle.rs:17:5
+   |
+LL |     let _ = tokio::spawn(work());
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: keep the handle (or spawn into a `tokio::task::JoinSet`) and await it; if detaching is intended, write `drop(handle)` with a comment saying why
+
+warning: `tokio::task::JoinHandle` is dropped, so the task's panics and result are silently lost
+  --> $DIR/discarded_join_handle.rs:19:5
+   |
+LL |     _ = tokio::spawn(work());
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: keep the handle (or spawn into a `tokio::task::JoinSet`) and await it; if detaching is intended, write `drop(handle)` with a comment saying why
+
+warning: `tokio::task::JoinHandle` is dropped, so the task's panics and result are silently lost
+  --> $DIR/discarded_join_handle.rs:21:5
+   |
+LL |     tokio::task::spawn_blocking(|| 1);
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: keep the handle (or spawn into a `tokio::task::JoinSet`) and await it; if detaching is intended, write `drop(handle)` with a comment saying why
+
+warning: `tokio::task::JoinHandle` is dropped, so the task's panics and result are silently lost
+  --> $DIR/discarded_join_handle.rs:24:5
+   |
+LL |     runtime_handle.spawn(work());
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: keep the handle (or spawn into a `tokio::task::JoinSet`) and await it; if detaching is intended, write `drop(handle)` with a comment saying why
+
+warning: `std::thread::JoinHandle` is dropped, so the task's panics and result are silently lost
+  --> $DIR/discarded_join_handle.rs:28:5
+   |
+LL |     std::thread::spawn(|| 1);
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: keep the handle and `join()` it, or use `std::thread::scope`; if detaching is intended, write `drop(handle)` with a comment saying why
+
+warning: `std::thread::JoinHandle` is dropped, so the task's panics and result are silently lost
+  --> $DIR/discarded_join_handle.rs:30:5
+   |
+LL |     let _ = std::thread::spawn(|| 1);
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: keep the handle and `join()` it, or use `std::thread::scope`; if detaching is intended, write `drop(handle)` with a comment saying why
+
+warning: `std::thread::JoinHandle` is dropped, so the task's panics and result are silently lost
+  --> $DIR/discarded_join_handle.rs:32:5
+   |
+LL |     std::thread::Builder::new().name("worker".into()).spawn(|| 1).unwrap();
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: keep the handle and `join()` it, or use `std::thread::scope`; if detaching is intended, write `drop(handle)` with a comment saying why
+
+warning: 9 warnings emitted
+

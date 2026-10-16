@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  lints:
+    name: Dylint library, UI tests, end-to-end demo
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            ~/.dylint_drivers/
+            ~/.rustup/toolchains/
+            lints/target/
+            demo/target/
+          key: ${{ runner.os }}-${{ hashFiles('lints/rust-toolchain.toml', 'lints/Cargo.lock', 'demo/Cargo.lock') }}
+      - uses: cargo-bins/cargo-binstall@main
+      - run: cargo binstall --no-confirm cargo-dylint dylint-link
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and test the lint library
+        working-directory: lints
+        run: |
+          cargo build
+          cargo test
+          cargo clippy --lib --tests -- -D warnings
+      - name: End-to-end demo
+        run: scripts/e2e.sh
+
+  profile:
+    name: Stable lint profile
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+      - run: scripts/check-profile.sh

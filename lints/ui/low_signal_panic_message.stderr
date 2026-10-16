@@ -1,0 +1,83 @@
+warning: `expect` message "failed" does not state the violated invariant
+  --> $DIR/low_signal_panic_message.rs:7:28
+   |
+LL |     *values.first().expect("failed")
+   |                            ^^^^^^^^
+   |
+   = help: say why this cannot fail, e.g. `.expect("digit-only regex literal should be valid")`
+   = note: `#[warn(low_signal_panic_message)]` on by default
+
+warning: `expect` message "should never happen" does not state the violated invariant
+  --> $DIR/low_signal_panic_message.rs:11:26
+   |
+LL |     input.parse().expect("should never happen")
+   |                          ^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: say why this cannot fail, e.g. `.expect("digit-only regex literal should be valid")`
+
+warning: `expect` message "missing b" does not state the violated invariant
+  --> $DIR/low_signal_panic_message.rs:15:37
+   |
+LL |     map["a"] + *map.get("b").expect("missing b")
+   |                                     ^^^^^^^^^^^
+   |
+   = help: say why this cannot fail, e.g. `.expect("digit-only regex literal should be valid")`
+
+warning: `expect` message "This should never happen!" does not state the violated invariant
+  --> $DIR/low_signal_panic_message.rs:19:26
+   |
+LL |     input.parse().expect("This should never happen!")
+   |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: say why this cannot fail, e.g. `.expect("digit-only regex literal should be valid")`
+
+warning: `expect_err` message "must fail" does not state the violated invariant
+  --> $DIR/low_signal_panic_message.rs:23:36
+   |
+LL |     input.parse::<u8>().expect_err("must fail")
+   |                                    ^^^^^^^^^^^
+   |
+   = help: say why this cannot fail, e.g. `.expect("digit-only regex literal should be valid")`
+
+warning: `expect` message "" does not state the violated invariant
+  --> $DIR/low_signal_panic_message.rs:27:27
+   |
+LL |     *values.last().expect("")
+   |                           ^^
+   |
+   = help: say why this cannot fail, e.g. `.expect("digit-only regex literal should be valid")`
+
+warning: `panic!` message "oops" does not state the violated invariant
+  --> $DIR/low_signal_panic_message.rs:32:9
+   |
+LL |         panic!("oops");
+   |         ^^^^^^^^^^^^^^
+   |
+   = help: describe the invariant that was violated and the relevant state, e.g. `unreachable!("the tokenizer only produces ASCII digits here")`
+
+warning: `unreachable!` message "impossible" does not state the violated invariant
+  --> $DIR/low_signal_panic_message.rs:40:14
+   |
+LL |         _ => unreachable!("impossible"),
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: describe the invariant that was violated and the relevant state, e.g. `unreachable!("the tokenizer only produces ASCII digits here")`
+
+warning: `panic!` message "Something went wrong." does not state the violated invariant
+  --> $DIR/low_signal_panic_message.rs:46:9
+   |
+LL |         panic!("Something went wrong.");
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: describe the invariant that was violated and the relevant state, e.g. `unreachable!("the tokenizer only produces ASCII digits here")`
+
+warning: `panic!` message "bad state" does not state the violated invariant
+  --> $DIR/low_signal_panic_message.rs:52:9
+   |
+LL |         panic!(r#"bad state"#);
+   |         ^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: describe the invariant that was violated and the relevant state, e.g. `unreachable!("the tokenizer only produces ASCII digits here")`
+
+warning: 10 warnings emitted
+

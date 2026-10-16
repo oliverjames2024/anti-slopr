@@ -1,0 +1,27 @@
+warning: `Employee` implements `Deref<Target = Person>` to inherit `Person`'s methods, but it is a struct with several fields, not a smart pointer
+  --> $DIR/deref_polymorphism.rs:23:1
+   |
+LL | impl Deref for Employee {
+   | ^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: expose an accessor (`fn inner(&self) -> &Inner`), forward the methods callers need, or share behaviour through a trait
+   = note: `#[warn(deref_polymorphism)]` on by default
+
+warning: `Manager<T>` implements `Deref<Target = Employee>` to inherit `Employee`'s methods, but it is a struct with several fields, not a smart pointer
+  --> $DIR/deref_polymorphism.rs:43:1
+   |
+LL | impl<T> Deref for Manager<T> {
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: expose an accessor (`fn inner(&self) -> &Inner`), forward the methods callers need, or share behaviour through a trait
+
+warning: `Shape` implements `Deref<Target = Person>` to inherit `Person`'s methods, but it is an enum, not a smart pointer
+  --> $DIR/deref_polymorphism.rs:56:1
+   |
+LL | impl Deref for Shape {
+   | ^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: expose an accessor (`fn inner(&self) -> &Inner`), forward the methods callers need, or share behaviour through a trait
+
+warning: 3 warnings emitted
+

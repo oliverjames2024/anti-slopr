@@ -1,0 +1,139 @@
+warning: `utils` contains the vague word `utils`
+  --> $DIR/vague_symbol_name.rs:4:5
+   |
+LL | mod utils {
+   |     ^^^^^
+   |
+   = help: name the responsibility instead (what does it do, own, or represent?)
+   = note: `#[warn(vague_symbol_name)]` on by default
+
+warning: `format_thing` contains the vague word `thing`
+  --> $DIR/vague_symbol_name.rs:5:12
+   |
+LL |     pub fn format_thing() {}
+   |            ^^^^^^^^^^^^
+   |
+   = help: name the responsibility instead (what does it do, own, or represent?)
+
+warning: `string_helpers` contains the vague word `helpers`
+  --> $DIR/vague_symbol_name.rs:8:5
+   |
+LL | mod string_helpers {}
+   |     ^^^^^^^^^^^^^^
+   |
+   = help: name the responsibility instead (what does it do, own, or represent?)
+
+warning: `UserManager` contains the vague word `manager`
+  --> $DIR/vague_symbol_name.rs:10:8
+   |
+LL | struct UserManager;
+   |        ^^^^^^^^^^^
+   |
+   = help: name the responsibility instead (what does it do, own, or represent?)
+
+warning: `MiscKind` contains the vague word `misc`
+  --> $DIR/vague_symbol_name.rs:12:6
+   |
+LL | enum MiscKind {
+   |      ^^^^^^^^
+   |
+   = help: name the responsibility instead (what does it do, own, or represent?)
+
+warning: `TmpBits` contains the vague word `tmp`
+  --> $DIR/vague_symbol_name.rs:16:7
+   |
+LL | union TmpBits {
+   |       ^^^^^^^
+   |
+   = help: name the responsibility instead (what does it do, own, or represent?)
+
+warning: `ObjSource` contains the vague word `obj`
+  --> $DIR/vague_symbol_name.rs:21:7
+   |
+LL | trait ObjSource {
+   |       ^^^^^^^^^
+   |
+   = help: name the responsibility instead (what does it do, own, or represent?)
+
+warning: `my_value` contains the vague word `my`
+  --> $DIR/vague_symbol_name.rs:22:8
+   |
+LL |     fn my_value(&self) -> u32;
+   |        ^^^^^^^^
+   |
+   = help: name the responsibility instead (what does it do, own, or represent?)
+
+warning: `ShapeImpl` contains the vague word `shape`
+  --> $DIR/vague_symbol_name.rs:24:10
+   |
+LL |     type ShapeImpl;
+   |          ^^^^^^^^^
+   |
+   = help: name the responsibility instead (what does it do, own, or represent?)
+
+warning: `FooResult` contains the vague word `foo`
+  --> $DIR/vague_symbol_name.rs:27:6
+   |
+LL | type FooResult = Result<(), ()>;
+   |      ^^^^^^^^^
+   |
+   = help: name the responsibility instead (what does it do, own, or represent?)
+
+warning: `ServiceImpl` contains the vague word `impl`
+  --> $DIR/vague_symbol_name.rs:29:8
+   |
+LL | struct ServiceImpl;
+   |        ^^^^^^^^^^^
+   |
+   = help: name the responsibility instead (what does it do, own, or represent?)
+
+warning: `TMP_DIR` contains the vague word `tmp`
+  --> $DIR/vague_symbol_name.rs:31:7
+   |
+LL | const TMP_DIR: &str = "$TEST_BUILD_DIR";
+   |       ^^^^^^^
+   |
+   = help: name the responsibility instead (what does it do, own, or represent?)
+
+warning: `DUMMY_COUNTER` contains the vague word `dummy`
+  --> $DIR/vague_symbol_name.rs:33:8
+   |
+LL | static DUMMY_COUNTER: u32 = 0;
+   |        ^^^^^^^^^^^^^
+   |
+   = help: name the responsibility instead (what does it do, own, or represent?)
+
+warning: `HTTPUtils` contains the vague word `utils`
+  --> $DIR/vague_symbol_name.rs:35:8
+   |
+LL | struct HTTPUtils;
+   |        ^^^^^^^^^
+   |
+   = help: name the responsibility instead (what does it do, own, or represent?)
+
+warning: `do_stuff` contains the vague word `stuff`
+  --> $DIR/vague_symbol_name.rs:37:4
+   |
+LL | fn do_stuff() {}
+   |    ^^^^^^^^
+   |
+   = help: name the responsibility instead (what does it do, own, or represent?)
+
+warning: `helper` contains the vague word `helper`
+  --> $DIR/vague_symbol_name.rs:40:8
+   |
+LL |     fn helper(&self) {}
+   |        ^^^^^^
+   |
+   = help: name the responsibility instead (what does it do, own, or represent?)
+
+warning: `BAR` contains the vague word `bar`
+  --> $DIR/vague_symbol_name.rs:42:11
+   |
+LL |     const BAR: u32 = 1;
+   |           ^^^
+   |
+   = help: name the responsibility instead (what does it do, own, or represent?)
+
+warning: 17 warnings emitted
+

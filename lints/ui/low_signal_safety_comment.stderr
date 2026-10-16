@@ -1,0 +1,67 @@
+warning: `SAFETY:` justification `this is safe.` is too short to show why the unsafe code is sound
+  --> $DIR/low_signal_safety_comment.rs:8:5
+   |
+LL |     // SAFETY: this is safe.
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: name each precondition of the unsafe operation and why it holds here, e.g. why the pointer is non-null, aligned, and initialized
+   = note: `#[warn(low_signal_safety_comment)]` on by default
+
+warning: `SAFETY:` comment gives no justification
+  --> $DIR/low_signal_safety_comment.rs:11:5
+   |
+LL |     // SAFETY:
+   |     ^^^^^^^^^^
+   |
+   = help: name each precondition of the unsafe operation and why it holds here, e.g. why the pointer is non-null, aligned, and initialized
+
+warning: `SAFETY:` justification `trust me` is too short to show why the unsafe code is sound
+  --> $DIR/low_signal_safety_comment.rs:14:5
+   |
+LL |     // SAFETY: trust me
+   |     ^^^^^^^^^^^^^^^^^^^
+   |
+   = help: name each precondition of the unsafe operation and why it holds here, e.g. why the pointer is non-null, aligned, and initialized
+
+warning: `SAFETY:` justification `checked above.` is too short to show why the unsafe code is sound
+  --> $DIR/low_signal_safety_comment.rs:17:5
+   |
+LL |     // Safety: checked above.
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: name each precondition of the unsafe operation and why it holds here, e.g. why the pointer is non-null, aligned, and initialized
+
+warning: `SAFETY:` justification `we know this is safe here, trust me.` is a generic reassurance
+  --> $DIR/low_signal_safety_comment.rs:20:5
+   |
+LL |     // SAFETY: we know this is safe here, trust me.
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: name each precondition of the unsafe operation and why it holds here, e.g. why the pointer is non-null, aligned, and initialized
+
+warning: `SAFETY:` justification `the pointer is always valid and there is no UB.` is a generic reassurance
+  --> $DIR/low_signal_safety_comment.rs:23:5
+   |
+LL |     // SAFETY: the pointer is always valid and there is no UB.
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: name each precondition of the unsafe operation and why it holds here, e.g. why the pointer is non-null, aligned, and initialized
+
+warning: `SAFETY:` justification `it's fine` is too short to show why the unsafe code is sound
+  --> $DIR/low_signal_safety_comment.rs:26:8
+   |
+LL |     /* SAFETY: it's fine */
+   |        ^^^^^^^^^^^^^^^^^
+   |
+   = help: name each precondition of the unsafe operation and why it holds here, e.g. why the pointer is non-null, aligned, and initialized
+
+warning: `SAFETY:` justification `This should be fine because it is safe.` is a generic reassurance
+  --> $DIR/low_signal_safety_comment.rs:29:5
+   |
+LL |     // SAFETY: This should be fine because it is safe.
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: name each precondition of the unsafe operation and why it holds here, e.g. why the pointer is non-null, aligned, and initialized
+
+warning: 8 warnings emitted
+

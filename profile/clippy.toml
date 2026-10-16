@@ -1,0 +1,55 @@
+# anti-slopr Clippy configuration. Copy to the workspace root as clippy.toml.
+
+avoid-breaking-exported-api = false   # also fire on public API: the suggestion is the point
+allow-unwrap-in-tests = true
+allow-expect-in-tests = true
+allow-panic-in-tests = true
+allow-print-in-tests = true
+allow-dbg-in-tests = false            # dbg! in tests is still leftover debugging
+allow-unwrap-types = ["std::sync::LockResult", "std::sync::TryLockResult"]  # mutex poisoning
+max-fn-params-bools = 1               # more than one bool flag wants an enum
+max-struct-bools = 2
+too-many-arguments-threshold = 5
+too-many-lines-threshold = 80
+excessive-nesting-threshold = 5       # deep nesting is a strong slop signal
+type-complexity-threshold = 200
+warn-on-all-wildcard-imports = true
+allow-mixed-uninlined-format-args = false
+enforce-iter-loop-reborrow = true
+check-inconsistent-struct-field-initializers = true
+# Binding names only; anti-slopr's vague_symbol_name covers types, fns, and modules.
+disallowed-names = ["..", "bar", "qux", "tmp", "temp", "thing", "stuff", "dummy", "asdf", "data2", "result2"]
+
+disallowed-macros = [
+  { path = "std::dbg", reason = "debug output must not ship; use tracing::debug!" },
+]
+
+disallowed-methods = [
+  { path = "std::thread::sleep", reason = "sleep-based synchronisation hides races; wait on a channel, condvar, or barrier" },
+  { path = "std::env::set_var", reason = "process-global mutation; read config once at startup and pass it down" },
+  { path = "std::env::remove_var", reason = "process-global mutation; read config once at startup and pass it down" },
+  { path = "std::env::temp_dir", reason = "predictable shared path; use the tempfile crate" },
+  { path = "std::process::exit", reason = "skips destructors and buffered writers; return ExitCode from main" },
+  { path = "std::panic::catch_unwind", reason = "panics are not exceptions; return Result" },
+  { path = "std::time::Duration::from_secs_f32", reason = "panics on NaN, negative, or overflow", replacement = "std::time::Duration::try_from_secs_f32" },
+  { path = "std::time::Duration::from_secs_f64", reason = "panics on NaN, negative, or overflow", replacement = "std::time::Duration::try_from_secs_f64" },
+  { path = "std::option::Option::unwrap_unchecked", reason = "UB on None; prove the invariant in the type system or return an error" },
+  { path = "std::result::Result::unwrap_unchecked", reason = "UB on Err; prove the invariant in the type system or return an error" },
+  { path = "std::mem::transmute", reason = "use a typed conversion (from_bits, bytemuck, zerocopy) that states its preconditions" },
+  { path = "tokio::sync::mpsc::unbounded_channel", reason = "unbounded queue with no backpressure", replacement = "tokio::sync::mpsc::channel", allow-invalid = true },
+  { path = "serde_json::from_reader", reason = "unbuffered and slow; read into a buffer and use from_slice", allow-invalid = true },
+]
+
+disallowed-types = [
+  { path = "std::collections::LinkedList", reason = "almost always slower than Vec or VecDeque" },
+  { path = "once_cell::sync::Lazy", reason = "std has it now", replacement = "std::sync::LazyLock", allow-invalid = true },
+  { path = "once_cell::sync::OnceCell", reason = "std has it now", replacement = "std::sync::OnceLock", allow-invalid = true },
+  { path = "once_cell::unsync::Lazy", reason = "std has it now", replacement = "std::cell::LazyCell", allow-invalid = true },
+  { path = "once_cell::unsync::OnceCell", reason = "std has it now", replacement = "std::cell::OnceCell", allow-invalid = true },
+  { path = "lazy_static::lazy", reason = "std has it now; use std::sync::LazyLock", allow-invalid = true },
+]
+
+# Optional, per project:
+#   await-holding-invalid-types = ["tokio::sync::MutexGuard"]
+#   doc-valid-idents = ["..", "YourBrand"]
+#   msrv = "1.85"   (otherwise taken from rust-version)

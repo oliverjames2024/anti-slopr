@@ -1,0 +1,67 @@
+warning: public function returns the opaque error type `Box<dyn Error>`
+  --> $DIR/opaque_public_error.rs:8:19
+   |
+LL | pub fn boxed() -> Result<(), Box<dyn Error>> {
+   |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: return a concrete error type (an enum of failure modes implementing `std::error::Error`) so callers can match on it
+   = note: `#[warn(opaque_public_error)]` on by default
+
+warning: public function returns the opaque error type `Box<dyn Error + Send + Sync>`
+  --> $DIR/opaque_public_error.rs:12:29
+   |
+LL | pub fn boxed_send_sync() -> Result<u8, Box<dyn Error + Send + Sync + 'static>> {
+   |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: return a concrete error type (an enum of failure modes implementing `std::error::Error`) so callers can match on it
+
+warning: public function returns the opaque error type `anyhow::Error`
+  --> $DIR/opaque_public_error.rs:16:25
+   |
+LL | pub fn with_anyhow() -> anyhow::Result<String> {
+   |                         ^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: return a concrete error type (an enum of failure modes implementing `std::error::Error`) so callers can match on it
+
+warning: public function returns the opaque error type `anyhow::Error`
+  --> $DIR/opaque_public_error.rs:20:32
+   |
+LL | pub fn anyhow_spelled_out() -> Result<(), anyhow::Error> {
+   |                                ^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: return a concrete error type (an enum of failure modes implementing `std::error::Error`) so callers can match on it
+
+warning: public function returns the opaque error type `anyhow::Error`
+  --> $DIR/opaque_public_error.rs:24:32
+   |
+LL | pub async fn async_anyhow() -> anyhow::Result<()> {
+   |                                ^^^^^^^^^^^^^^^^^^
+   |
+   = help: return a concrete error type (an enum of failure modes implementing `std::error::Error`) so callers can match on it
+
+warning: public function returns the opaque error type `anyhow::Error`
+  --> $DIR/opaque_public_error.rs:31:28
+   |
+LL |     pub fn fetch(&self) -> anyhow::Result<Vec<u8>> {
+   |                            ^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: return a concrete error type (an enum of failure modes implementing `std::error::Error`) so callers can match on it
+
+warning: public function returns the opaque error type `Box<dyn Error + Send + Sync>`
+  --> $DIR/opaque_public_error.rs:37:33
+   |
+LL |     fn get(&self, key: &str) -> Result<Vec<u8>, Box<dyn Error + Send + Sync>>;
+   |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: return a concrete error type (an enum of failure modes implementing `std::error::Error`) so callers can match on it
+
+warning: public function returns the opaque error type `anyhow::Error`
+  --> $DIR/opaque_public_error.rs:41:28
+   |
+LL |     pub fn reexported() -> anyhow::Result<()> {
+   |                            ^^^^^^^^^^^^^^^^^^
+   |
+   = help: return a concrete error type (an enum of failure modes implementing `std::error::Error`) so callers can match on it
+
+warning: 8 warnings emitted
+

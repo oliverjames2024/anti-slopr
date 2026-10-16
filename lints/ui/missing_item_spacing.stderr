@@ -1,0 +1,195 @@
+warning: missing blank line before this item
+  --> $DIR/missing_item_spacing.rs:12:1
+   |
+LL | fn after_consts() {
+   | ^^^^^^^^^^^^^^^^^^^
+   |
+   = note: this item spans multiple lines
+   = note: `#[warn(missing_item_spacing)]` on by default
+help: insert a blank line
+   |
+LL | const ALSO_SHORT: u32 = 2;
+   |                           +
+
+warning: missing blank line before this item
+  --> $DIR/missing_item_spacing.rs:15:1
+   |
+LL | fn glued() {
+   | ^^^^^^^^^^^^
+   |
+   = note: the previous item spans multiple lines
+help: insert a blank line
+   |
+LL | }
+   |  +
+
+warning: missing blank line before this item
+  --> $DIR/missing_item_spacing.rs:18:1
+   |
+LL | /// Doc comments travel with the item they document.
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: the previous item spans multiple lines
+help: insert a blank line
+   |
+LL | }
+   |  +
+
+warning: missing blank line before this item
+  --> $DIR/missing_item_spacing.rs:24:1
+   |
+LL | struct Commented;
+   | ^^^^^^^^^^^^^^^^^
+   |
+   = note: the previous item spans multiple lines
+help: insert a blank line
+   |
+LL | }
+   |  +
+
+warning: missing blank line before this item
+  --> $DIR/missing_item_spacing.rs:25:1
+   |
+LL | fn trailing_comment() {
+   | ^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: this item spans multiple lines
+help: insert a blank line
+   |
+LL | struct Commented;
+   |                  +
+
+warning: missing blank line before this item
+  --> $DIR/missing_item_spacing.rs:28:1
+   |
+LL | struct Unit;
+   | ^^^^^^^^^^^^
+   |
+   = note: the previous item spans multiple lines
+help: insert a blank line
+   |
+LL | } // closes `trailing_comment`
+   |                               +
+
+warning: missing blank line before this item
+  --> $DIR/missing_item_spacing.rs:34:1
+   |
+LL | impl Point {
+   | ^^^^^^^^^^^^
+   |
+   = note: the previous item spans multiple lines
+help: insert a blank line
+   |
+LL | }
+   |  +
+
+warning: missing blank line before this item
+  --> $DIR/missing_item_spacing.rs:36:5
+   |
+LL |     fn new(x: i32, y: i32) -> Self {
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: this item spans multiple lines
+help: insert a blank line
+   |
+LL |     const ORIGIN: Point = Point { x: 0, y: 0 };
+   |                                                +
+
+warning: missing blank line before this item
+  --> $DIR/missing_item_spacing.rs:39:5
+   |
+LL |     fn x(&self) -> i32 {
+   |     ^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: the previous item spans multiple lines
+help: insert a blank line
+   |
+LL |     }
+   |      +
+
+warning: missing blank line before this item
+  --> $DIR/missing_item_spacing.rs:46:5
+   |
+LL |     fn describe(&self) -> String {
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: this item spans multiple lines
+help: insert a blank line
+   |
+LL |     fn area(&self) -> f64;
+   |                           +
+
+warning: missing blank line before this item
+  --> $DIR/missing_item_spacing.rs:49:5
+   |
+LL |     fn name(&self) -> &str;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: the previous item spans multiple lines
+help: insert a blank line
+   |
+LL |     }
+   |      +
+
+warning: missing blank line before this item
+  --> $DIR/missing_item_spacing.rs:56:5
+   |
+LL |     pub fn b() {}
+   |     ^^^^^^^^^^^^^
+   |
+   = note: the previous item spans multiple lines
+help: insert a blank line
+   |
+LL |     }
+   |      +
+
+warning: missing blank line before this statement
+  --> $DIR/missing_item_spacing.rs:61:5
+   |
+LL |     let total = values
+   |     ^^^^^^^^^^^^^^^^^^
+   |
+   = note: this statement spans multiple lines
+help: insert a blank line
+   |
+LL |     let first = values.first().copied().unwrap_or(0);
+   |                                                      +
+
+warning: missing blank line before this statement
+  --> $DIR/missing_item_spacing.rs:64:5
+   |
+LL |     if total > 10 {
+   |     ^^^^^^^^^^^^^^^
+   |
+   = note: the previous statement spans multiple lines
+help: insert a blank line
+   |
+LL |         .sum::<u32>();
+   |                       +
+
+warning: missing blank line before this statement
+  --> $DIR/missing_item_spacing.rs:67:5
+   |
+LL |     let Some(last) = values.last() else {
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: the previous statement spans multiple lines
+help: insert a blank line
+   |
+LL |     }
+   |      +
+
+warning: missing blank line before this statement
+  --> $DIR/missing_item_spacing.rs:70:5
+   |
+LL |     first + total + last
+   |     ^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: the previous statement spans multiple lines
+help: insert a blank line
+   |
+LL |     };
+   |       +
+
+warning: 16 warnings emitted
+

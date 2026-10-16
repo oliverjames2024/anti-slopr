@@ -1,0 +1,13 @@
+# anti-slopr cargo-deny bans (https://github.com/EmbarkStudios/cargo-deny).
+# Merge the [bans] table into your deny.toml, then run `cargo deny check bans`.
+
+[bans]
+multiple-versions = "warn"
+wildcard-dependencies = "deny"
+deny = [
+  # Rust analogue of anti-slop's no-module-mocking: test through real seams
+  # (sans-IO cores, in-memory fakes, test containers), not generated mocks.
+  { crate = "mockall", reason = "mock real seams instead: sans-IO cores, in-memory fakes, or test containers" },
+  { crate = "mockito", reason = "run a real local server or an in-memory fake transport" },
+  { crate = "faux", reason = "mock real seams instead: sans-IO cores, in-memory fakes, or test containers" },
+]

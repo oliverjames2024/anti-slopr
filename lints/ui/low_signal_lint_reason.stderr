@@ -1,0 +1,75 @@
+warning: `expect` reason "needed" does not say why the suppression is correct
+  --> $DIR/low_signal_lint_reason.rs:1:45
+   |
+LL | #![expect(clippy::needless_return, reason = "needed")]
+   |                                             ^^^^^^^^
+   |
+   = help: state the invariant or evidence the lint cannot see, e.g. `reason = "index is bounded by the length check above"`
+   = note: `#[warn(low_signal_lint_reason)]` on by default
+
+warning: `allow` reason "intentional" does not say why the suppression is correct
+  --> $DIR/low_signal_lint_reason.rs:3:29
+   |
+LL | #[allow(dead_code, reason = "intentional")]
+   |                             ^^^^^^^^^^^^^
+   |
+   = help: state the invariant or evidence the lint cannot see, e.g. `reason = "index is bounded by the length check above"`
+
+warning: `expect` reason "false positive" does not say why the suppression is correct
+  --> $DIR/low_signal_lint_reason.rs:6:53
+   |
+LL | #[expect(clippy::cast_possible_truncation, reason = "false positive")]
+   |                                                     ^^^^^^^^^^^^^^^^
+   |
+   = help: state the invariant or evidence the lint cannot see, e.g. `reason = "index is bounded by the length check above"`
+
+warning: `allow` reason "this is needed here" does not say why the suppression is correct
+  --> $DIR/low_signal_lint_reason.rs:11:29
+   |
+LL | #[allow(dead_code, reason = "this is needed here")]
+   |                             ^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: state the invariant or evidence the lint cannot see, e.g. `reason = "index is bounded by the length check above"`
+
+warning: `allow` reason "Temporary, fix later." does not say why the suppression is correct
+  --> $DIR/low_signal_lint_reason.rs:14:29
+   |
+LL | #[allow(dead_code, reason = "Temporary, fix later.")]
+   |                             ^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: state the invariant or evidence the lint cannot see, e.g. `reason = "index is bounded by the length check above"`
+
+warning: `allow` reason "it's fine for now" does not say why the suppression is correct
+  --> $DIR/low_signal_lint_reason.rs:17:29
+   |
+LL | #[allow(dead_code, reason = "it's fine for now")]
+   |                             ^^^^^^^^^^^^^^^^^^^
+   |
+   = help: state the invariant or evidence the lint cannot see, e.g. `reason = "index is bounded by the length check above"`
+
+warning: `allow` reason "Clippy is wrong here" does not say why the suppression is correct
+  --> $DIR/low_signal_lint_reason.rs:20:29
+   |
+LL | #[allow(dead_code, reason = "Clippy is wrong here")]
+   |                             ^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: state the invariant or evidence the lint cannot see, e.g. `reason = "index is bounded by the length check above"`
+
+warning: `allow` reason "kept around" does not say why the suppression is correct
+  --> $DIR/low_signal_lint_reason.rs:23:29
+   |
+LL | #[allow(dead_code, reason = "kept around")]
+   |                             ^^^^^^^^^^^^^
+   |
+   = help: state the invariant or evidence the lint cannot see, e.g. `reason = "index is bounded by the length check above"`
+
+warning: `allow` reason "" does not say why the suppression is correct
+  --> $DIR/low_signal_lint_reason.rs:26:29
+   |
+LL | #[allow(dead_code, reason = "")]
+   |                             ^^
+   |
+   = help: state the invariant or evidence the lint cannot see, e.g. `reason = "index is bounded by the length check above"`
+
+warning: 9 warnings emitted
+

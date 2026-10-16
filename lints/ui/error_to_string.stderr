@@ -1,0 +1,83 @@
+warning: `map_err` turns the `std::num::ParseIntError` error into `std::string::String`, dropping its type and source chain
+  --> $DIR/error_to_string.rs:7:35
+   |
+LL |     let port: u16 = input.parse().map_err(|e: ParseIntError| e.to_string())?;
+   |                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: add a variant to a dedicated error type that keeps the cause as `#[source]`, or use `anyhow::Context` in a binary
+   = note: `#[warn(error_to_string)]` on by default
+
+warning: `map_err` turns the `<T as std::str::FromStr>::Err` error into `std::string::String`, dropping its type and source chain
+  --> $DIR/error_to_string.rs:15:27
+   |
+LL |     Ok(input.parse::<T>().map_err(|e| format!("invalid value {input:?}: {e}"))?)
+   |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: add a variant to a dedicated error type that keeps the cause as `#[source]`, or use `anyhow::Context` in a binary
+
+warning: `map_err` turns the `std::num::ParseIntError` error into `&str`, dropping its type and source chain
+  --> $DIR/error_to_string.rs:19:58
+   |
+LL |     let parsed: Result<u16, &str> = input.parse::<u16>().map_err(|_| "bad port");
+   |                                                          ^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: add a variant to a dedicated error type that keeps the cause as `#[source]`, or use `anyhow::Context` in a binary
+
+warning: `map_err` turns the `std::num::ParseIntError` error into `std::string::String`, dropping its type and source chain
+  --> $DIR/error_to_string.rs:24:26
+   |
+LL |     input.parse::<u16>().map_err(|e| e.to_string())
+   |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: add a variant to a dedicated error type that keeps the cause as `#[source]`, or use `anyhow::Context` in a binary
+
+warning: `map_err` turns the `std::num::ParseIntError` error into `std::boxed::Box<str>`, dropping its type and source chain
+  --> $DIR/error_to_string.rs:28:26
+   |
+LL |     input.parse::<i64>().map_err(|e| e.to_string().into_boxed_str())
+   |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: add a variant to a dedicated error type that keeps the cause as `#[source]`, or use `anyhow::Context` in a binary
+
+warning: `map_err` turns the `std::num::ParseIntError` error into `std::borrow::Cow<'_, str>`, dropping its type and source chain
+  --> $DIR/error_to_string.rs:32:26
+   |
+LL |     input.parse::<i64>().map_err(|e| Cow::Owned(ToString::to_string(&e)))
+   |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: add a variant to a dedicated error type that keeps the cause as `#[source]`, or use `anyhow::Context` in a binary
+
+warning: `map_err` turns the `std::num::ParseIntError` error into `std::string::String`, dropping its type and source chain
+  --> $DIR/error_to_string.rs:40:28
+   |
+LL |     Ok(input.parse::<u8>().map_err(describe)?)
+   |                            ^^^^^^^^^^^^^^^^^
+   |
+   = help: add a variant to a dedicated error type that keeps the cause as `#[source]`, or use `anyhow::Context` in a binary
+
+warning: `ok_or` turns `None` into a `&str` error
+  --> $DIR/error_to_string.rs:44:21
+   |
+LL |     Ok(map.get(&id).ok_or("no such user")?)
+   |                     ^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: return a dedicated error type (for example an enum variant naming the missing value), or use `anyhow::Context` in a binary
+
+warning: `ok_or` turns `None` into a `std::string::String` error
+  --> $DIR/error_to_string.rs:48:21
+   |
+LL |     Ok(map.get(&id).ok_or(format!("no user {id}"))?)
+   |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: return a dedicated error type (for example an enum variant naming the missing value), or use `anyhow::Context` in a binary
+
+warning: `ok_or_else` turns `None` into a `std::string::String` error
+  --> $DIR/error_to_string.rs:52:21
+   |
+LL |     Ok(map.get(&id).ok_or_else(|| format!("no user {id}"))?)
+   |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: return a dedicated error type (for example an enum variant naming the missing value), or use `anyhow::Context` in a binary
+
+warning: 10 warnings emitted
+

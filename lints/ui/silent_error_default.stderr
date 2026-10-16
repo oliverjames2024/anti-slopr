@@ -1,0 +1,91 @@
+warning: `unwrap_or` replaces the error of this `Result` with a fallback value
+  --> $DIR/silent_error_default.rs:10:19
+   |
+LL |     input.parse().unwrap_or(8080)
+   |                   ^^^^^^^^^^^^^^^
+   |
+   = help: propagate the error with `?`, or `match` on it and handle or log the failure explicitly
+   = note: `#[warn(silent_error_default)]` on by default
+
+warning: `unwrap_or_default` replaces the error of this `Result` with a fallback value
+  --> $DIR/silent_error_default.rs:14:19
+   |
+LL |     input.parse().unwrap_or_default()
+   |                   ^^^^^^^^^^^^^^^^^^^
+   |
+   = help: propagate the error with `?`, or `match` on it and handle or log the failure explicitly
+
+warning: `unwrap_or_else` ignores the error of this `Result` and returns a fallback value
+  --> $DIR/silent_error_default.rs:18:19
+   |
+LL |     input.parse().unwrap_or_else(|_| 0)
+   |                   ^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: propagate the error with `?`, or `match` on it and handle or log the failure explicitly
+
+warning: `unwrap_or_else` ignores the error of this `Result` and returns a fallback value
+  --> $DIR/silent_error_default.rs:22:19
+   |
+LL |     input.parse().unwrap_or_else(|_err: ParseIntError| 1)
+   |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: propagate the error with `?`, or `match` on it and handle or log the failure explicitly
+
+warning: `.ok().unwrap_or_default()` discards the error of this `Result`
+  --> $DIR/silent_error_default.rs:26:30
+   |
+LL |     fs::read_to_string(path).ok().unwrap_or_default()
+   |                              ^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: propagate the error with `?`, or `match` on it and handle or log the failure explicitly
+
+warning: `.ok().unwrap_or(..)` discards the error of this `Result`
+  --> $DIR/silent_error_default.rs:30:19
+   |
+LL |     input.parse().ok().unwrap_or(false)
+   |                   ^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: propagate the error with `?`, or `match` on it and handle or log the failure explicitly
+
+warning: `.ok().flatten()` discards the error of this `Result`
+  --> $DIR/silent_error_default.rs:34:12
+   |
+LL |     result.ok().flatten()
+   |            ^^^^^^^^^^^^^^
+   |
+   = help: propagate the error with `?`, or `match` on it and handle or log the failure explicitly
+
+warning: `filter_map` with `Result::ok` silently drops every `Err` item
+  --> $DIR/silent_error_default.rs:38:19
+   |
+LL |     lines.lines().filter_map(Result::ok).collect()
+   |                   ^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: propagate the error with `?`, or `match` on it and handle or log the failure explicitly
+
+warning: `filter_map` with `Result::ok` silently drops every `Err` item
+  --> $DIR/silent_error_default.rs:42:52
+   |
+LL |     inputs.iter().map(|input| input.parse::<u8>()).filter_map(|parsed| parsed.ok()).collect()
+   |                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: propagate the error with `?`, or `match` on it and handle or log the failure explicitly
+
+warning: `flat_map` with `Result::ok` silently drops every `Err` item
+  --> $DIR/silent_error_default.rs:46:52
+   |
+LL |     inputs.iter().map(|input| input.parse::<u8>()).flat_map(Result::ok).collect()
+   |                                                    ^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: propagate the error with `?`, or `match` on it and handle or log the failure explicitly
+
+warning: `flatten` on an iterator of `Result`s silently drops every `Err` item
+  --> $DIR/silent_error_default.rs:50:27
+   |
+LL |     Ok(fs::read_dir(dir)?.flatten().count())
+   |                           ^^^^^^^^^
+   |
+   = help: propagate the error with `?`, or `match` on it and handle or log the failure explicitly
+
+warning: 11 warnings emitted
+

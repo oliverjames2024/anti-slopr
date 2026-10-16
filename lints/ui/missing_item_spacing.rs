@@ -1,0 +1,160 @@
+// run-rustfix
+#![allow(unknown_lints, dead_code, unused_variables, unused_imports, path_statements, clippy::let_and_return)]
+
+use std::collections::HashMap;
+use std::fmt::{
+    self, Display,
+};
+use std::io;
+
+const SHORT: u32 = 1;
+const ALSO_SHORT: u32 = 2;
+fn after_consts() {
+    let x = 1;
+}
+fn glued() {
+    let y = 2;
+}
+/// Doc comments travel with the item they document.
+#[derive(Debug)]
+struct Documented {
+    field: u32,
+}
+// A comment above the next item stays attached to it.
+struct Commented;
+fn trailing_comment() {
+    let z = 3;
+} // closes `trailing_comment`
+struct Unit;
+
+struct Point {
+    x: i32,
+    y: i32,
+}
+impl Point {
+    const ORIGIN: Point = Point { x: 0, y: 0 };
+    fn new(x: i32, y: i32) -> Self {
+        Self { x, y }
+    }
+    fn x(&self) -> i32 {
+        self.x
+    }
+}
+
+trait Shape {
+    fn area(&self) -> f64;
+    fn describe(&self) -> String {
+        format!("area {}", self.area())
+    }
+    fn name(&self) -> &str;
+}
+
+mod inner {
+    pub fn a() {
+        let _ = 1;
+    }
+    pub fn b() {}
+}
+
+fn statements(values: &[u32]) -> u32 {
+    let first = values.first().copied().unwrap_or(0);
+    let total = values
+        .iter()
+        .sum::<u32>();
+    if total > 10 {
+        return total;
+    }
+    let Some(last) = values.last() else {
+        return first;
+    };
+    first + total + last
+}
+
+#[allow(missing_item_spacing)]
+fn allowed() {
+    let a = 1;
+    let b = {
+        a + 1
+    };
+    b;
+}
+
+// ---------------------------------------------------------------------------
+// Not linted.
+// ---------------------------------------------------------------------------
+
+// Not linted: declarations (`extern crate`, `use`, `mod name;`) group freely.
+extern crate core as renamed_core;
+use renamed_core::{
+    cmp::Ordering, ops::Add,
+};
+
+// Not linted: single-line items may stay grouped.
+struct A;
+struct B;
+type C = u32;
+
+// Not linted: `use` declarations never need separating, even multi-line ones.
+fn uses() {
+    use std::collections::{
+        BTreeMap, BTreeSet,
+    };
+    use std::fmt::Write;
+}
+
+// Not linted: single-line statements may stay grouped, and the first and last
+// statements of a block need no blank line next to the braces.
+fn grouped() -> u32 {
+    let a = 1;
+    let b = 2;
+    a + b
+}
+
+// Not linted: separated by a blank line already (the comment may sit on either side).
+fn spaced() {
+    let a = 1;
+
+    // The next statement spans multiple lines.
+    let b = {
+        a + 1
+    };
+    // The blank line may also come after a trailing comment.
+
+    let c = b;
+}
+
+// Not linted: something other than whitespace and comments separates the pair.
+macro_rules! make_item {
+    () => {
+        fn generated() {}
+    };
+}
+
+fn before_macro() {
+    let _ = 1;
+}
+make_item!();
+fn after_macro() {
+    let _ = 1;
+}
+
+// Not linted: items produced by a macro expansion.
+macro_rules! two_fns {
+    () => {
+        fn one() {
+            let _ = 1;
+        }
+        fn two() {
+            let _ = 2;
+        }
+    };
+}
+
+two_fns!();
+
+// Not linted: neighbours on the same line.
+fn same_line_a() {
+    let _ = 1;
+} fn same_line_b() {}
+
+fn main() {}
